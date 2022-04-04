@@ -1,0 +1,37 @@
+[package]
+name = "platform-path"
+version = "0.1.0"
+authors = ["Chris Olstrom <chris@olstrom.com>"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/colstrom/platform-path/"
+documentation = "https://docs.rs/platform-path/"
+description = "CLI for identifying the platform path"
+
+[features]
+default = []
+all = ["json", "https", "yaml"]
+
+serde1 = ["serde", "camino/serde1"]
+json = ["serde1", "serde_json"]
+yaml = ["serde1", "serde_yaml"]
+
+async = ["async-std"]
+http = ["async", "tide"]
+https = ["http", "tide-rustls"]
+
+[dependencies]
+anyhow = "1.0.56"
+camino = "1.0.7"
+directories = "4.0.1"
+structopt = "0.3.26"
+thiserror = "1.0.30"
+
+strum = { version = "0.24.0", features = ["derive"] }
+
+async-std   = { optional = true, version = "1.10.0", features = ["attributes"]  }
+serde       = { optional = true, version = "1.0.136", features = ["derive"] }
+serde_json  = { optional = true, version = "1.0.79" }
+serde_yaml  = { optional = true, version = "0.8.23" }
+tide        = { optional = true, version = "0.16.0" }
+tide-rustls = { optional = true, version = "0.3.0" }
